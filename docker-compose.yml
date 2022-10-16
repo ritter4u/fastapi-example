@@ -1,0 +1,19 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  fastapi:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./conf/postgresql.conf:/etc/postgresql/
+      - ./dbdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER : "postgres"
+      POSTGRES_PASSWORD : "postgres"
+      POSTGRES_DB : "postgres"
+      POSTGRESQL_DIR : "./dbdata"

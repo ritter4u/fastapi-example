@@ -7,7 +7,7 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.10.8"
-fastapi = {version = "^0.85.0",extras = ["all"]}
+fastapi = {version = "^0.85.1",extras = ["all"]}
 uvicorn = "0.18.3"
 passlib = {version = "^1.7",extras = ["bcrypt"]}
 pyjwt = "^2.5.0"
@@ -15,10 +15,19 @@ sqlalchemy = "^1.4.41"
 alembic = "^1.8.1"
 asyncpg = "^0.26.0"
 syncpg = "^1.1.2"
-psycopg2-binary = "^2.7"
+psycopg2-binary = "^2.9.4"
+starlette="0.20.4"
+httpx = "^0.23.0"
+jinja2 = "^3.1.2"
+python-multipart = "^0.0.5"
+itsdangerous = "^2.1.2"
+pyyaml = "^6.0"
 
 
 [tool.poetry.dev-dependencies]
+
+[tool.poetry.group.dev.dependencies]
+autopep8 = "^1.7.0"
 
 [build-system]
 requires = ["poetry>=1.2.2"]
