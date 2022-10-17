@@ -9,7 +9,7 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 
 # install poetry
 RUN apt-get update \
-    && apt-get install -y curl gcc libpq-dev iputils-ping \
+    && apt-get install -y curl gcc python3-dev musl-dev libpq-dev iputils-ping \
     && curl -sSL https://install.python-poetry.org | python3 - \
     && chmod 755 ${POETRY_HOME}/bin/poetry
 RUN pip3 install asyncpg
@@ -31,8 +31,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# COPY . ./
+COPY app ./app
+COPY .env ./.env
+COPY alembic.ini ./alembic.ini
+
 # copy the venv folder from builder image
-COPY . ./
 COPY --from=builder /app/.venv ./.venv
 
 EXPOSE 8000

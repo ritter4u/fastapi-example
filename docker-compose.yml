@@ -10,6 +10,7 @@ services:
     volumes:
       - ./conf/postgresql.conf:/etc/postgresql/
       - ./dbdata:/var/lib/postgresql/data
+      - ./conf/sql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql
     environment:
       POSTGRES_USER : ${POSTGRES_USER}
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
