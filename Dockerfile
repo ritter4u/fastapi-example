@@ -9,7 +9,7 @@ ENV PATH="$POETRY_HOME/bin:$PATH"
 
 # install poetry
 RUN apt-get update \
-    && apt-get install -y curl gcc \
+    && apt-get install -y curl gcc libpq-dev iputils-ping \
     && curl -sSL https://install.python-poetry.org | python3 - \
     && chmod 755 ${POETRY_HOME}/bin/poetry
 RUN pip3 install asyncpg
@@ -32,7 +32,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 # copy the venv folder from builder image
-COPY --from=builder /app/.venv ./.venv
 COPY . ./
+COPY --from=builder /app/.venv ./.venv
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+EXPOSE 8000
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000","--reload"]
