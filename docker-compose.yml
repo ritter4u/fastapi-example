@@ -1,4 +1,4 @@
-version: "3"  # optional since v1.27.0
+version: "3.9"  # optional since v1.27.0
 services:
   postgres:
     image: postgres:15-alpine
@@ -14,9 +14,11 @@ services:
       POSTGRES_USER : ${POSTGRES_USER}
       POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
       POSTGRES_DB : ${POSTGRES_DB}
+      PGUSER: ${POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
       POSTGRESQL_DIR : "./dbdata"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD", "pg_isready", "-U", "postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
